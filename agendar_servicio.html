@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="img/icono.png">
+    <title>CarWash Agendando</title>
+
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <header id="header">
+
+        <img src="img/menuiconwhite.png" alt="menu" class="menu" id="menu">
+
+        <div class="contenedor_logo">
+            <img src="img/icono.png" alt="logo" class="logo">
+        </div>
+        <div class="div2">
+            <nav id="nav"> 
+                <ul>
+                    <li>
+                        <a href="">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="">Agendar Servicio</a>
+                    </li>
+                    <li>
+                        <a href="">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="">Mapa Y Galeria</a>
+                    </li>
+                    <li>
+                        <a href="">Ubicación Y Contacto</a>
+                    </li>
+                </ul>
+                
+            </nav>
+
+        </div>
+    </header>
+    <div id="contenido">
+        <div >
+            <h1>Agendar servicio</h1>
+            <br>
+            <br>
+            <form action="" id="formulario_agenda">
+                <label for="tipo_solicitud">Tipo solicitud</label>
+                <select name="tipo_solicitud" id="tipo_solicitud">
+                    <option value="">Seleccionar</option>
+                    <option value="consulta">Lavado</option>
+                    <option value="reclamo">Encerado</option>
+                    <option value="sugerencia">Limpieza Tapiz</option>
+                    <option value="felicitaciones">nose que mas</option>
+                </select>
+                <br>
+                <label for="text">Fecha/Hora</label>
+                <input type="datetime-local" name="" id="fecha">
+                <br>
+                <label for="nombre">Nombre Cliente</label>
+                <input type="text" name="nombre" id="nombre">
+                <br>
+                <label for="telefono">Telefono de contacto</label>
+                <input type="text" name="fono" id="fono">
+                <br>
+                <label for="email">Correo electronico</label>
+                <input placeholder="tu_correo@email.cl" type="email" name="email" id="email">
+                <br>
+                <label for="patente">Patente</label>
+                <input type="text" name="patente" id="patente">
+                <br>
+                <label for="modelo">Modelo</label>
+                <input type="text" name="modelo" id="modelo">
+                <br>
+                <br>
+                <input type="reset" value="Limpiar" class="button secondary">
+
+                <input type="button" value="Guardar" id="guardar" class="button primary">
+
+                        
+            </form>
+        </div>
+        
+    </div>
+
+    <footer>
+        <div class="marcas">
+            <img src="img/png/bmw.png" alt="bmw">
+            <img src="img/png/mercedes-benz.png" alt="mercedes-benz">
+            <img src="img/png/nissan.png" alt="nissan">
+            <img src="img/png/subaru.png" alt="subaru">
+            <img src="img/png/toyota.png" alt="toyota">
+            <img src="img/png/suzuki.png" alt="suzuki">
+        </div>
+        <div>
+            <div>
+                <ul>
+                    <li>
+                        <h2>MAPA DE SITIO</h2>
+                    </li>
+                    <li>
+                        <a href="">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="">Agendar Servicio</a>
+                    </li>
+                    <li>
+                        <a href="">Servicios</a>
+                        <ul>
+                            <li>
+                                <a href="">Full</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="">Deluxe</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="">Tapiz Full</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="">Tapiz Básico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="">Mapa Y Galeria</a>
+                    </li>
+                    <li>
+                        <a href="">Ubicación Y Contacto</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <h2>COLABORADORES</h2>
+                    </li>
+                    <li>
+                        <a href="">Ingreso Trabajadores</a>
+                    </li>
+                    <li>
+                        <a href="">Inventario insumos</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
