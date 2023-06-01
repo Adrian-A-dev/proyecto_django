@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+
+
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<form action="" method="post" enctype="multipart/form-data">
+           
+    {% csrf_token %}
+
+    {{ form | crispy }}
+
+    <br>
+    <input type="submit" value="Modificar" id="modificar" class="btn btn-primary float-right">
+
+            
+</form>
+
+{% endblock %}

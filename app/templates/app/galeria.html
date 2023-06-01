@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Galeria{% endblock %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+{% endblock %}
+
+{% block js%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.galeria');
+</script>
+{% endblock %}
+
+{% block contenido %}
+{% load humanize %}
+<img src="{% static 'app/img/galeria/footer3.jpg' %}" alt="galeria" class="galeria_img"> 
+
+<div class="containergal contenedor-galeria">
+
+    <h1>Galeria</h1>
+
+ 
+    
+    <div class="galeria">
+
+        <div class="row">
+           {% for g in galeria %}
+            <div class="col-sm-6 col-md-4">
+                <a class="galeria-img" href="{{ g.imagen.url }}">
+                    <img src="{{ g.imagen.url }}" alt="Park">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+
+        <br>
+
+        <img src="{% static 'app/img/galeria/ubicacion.jpg' %}" alt="">
+        <br>
+        <br>
+        <div class="mapa">
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.325456832262!2d-70.56911534926651!3d-33.596859112332545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d6fb99241877%3A0x5aabc0a269915d03!2sAv.%20San%20Carlos%20740%2C%20Puente%20Alto%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses!2scl!4v1600963629855!5m2!1ses!2scl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+
+{% endblock %}
+

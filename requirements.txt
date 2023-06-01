@@ -1,0 +1,11 @@
+django
+pillow
+django-crispy-forms
+django-admin-interface
+django-rest-framework
+social-auth-app-django
+django-pwa
+fcm-django
+
+#pip install -r .\requirements.txt
+

@@ -1,0 +1,79 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% load static %}
+
+{% block css %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+    $('.slider').bxSlider({
+        auto: true
+    });
+    });
+</script>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="slider">
+    {% for s in slider %}
+    <div>
+        <a href="">
+            {% if s.imagen %}
+            <img src="{{ s.imagen.url }}" alt="banner" class="imagen_slider">
+            {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% load humanize %}
+<div class="servicios">
+
+
+    {% for s in servicios %}
+    <div class="servicio">
+
+        <div class="contenedor_servicio">
+            {% if s.imagen %}
+            <img src="{{ s.imagen.url }}" alt="servicio">
+            {% endif %}
+            <div class="detalle">
+                <h3>{{ s.nombre | capfirst }}</h3>
+                <h5>${{ s.precio | intcomma }}</h5>
+                <h6>{{ s.descripcion }}</h6>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    
+</div>
+
+<div class="clientes">
+    <h2>Clientes Felices</h2>
+</div>
+<div class="contenedor_clientes">
+    <img src="{% static 'app/img/clientesfelices/icon.png' %}" alt="Avatar" style="width:90px">
+    <p><span>Juan Wick</span> Animal lover profesional</p>
+    <p>Excelente atencion. Volveré.</p>
+  </div>
+  <div class="contenedor_clientes">
+    <img src="{% static 'app/img/clientesfelices/PerfilJoacoCircular.png' %}" alt="Avatar" style="width:90px">
+    <p><span >Cosme Fulanito</span> Atelier</p>
+    <p>Mi vehículo quedó impecable.</p>
+  </div>
+</div>
+
+{% endblock %}

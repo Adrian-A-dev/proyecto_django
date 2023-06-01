@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Registrar Cliente{% endblock %}
+
+{% load static %}
+
+{% block css %}
+
+<link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script src="{% static 'app/js/formulario_jquery.js' %}"></script>
+<script src="{% static 'app/js/traducciones.js' %}"></script>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div id="contenido_formulario">
+    <img src="{% static 'app/img/galeria/registro.jpg' %}" alt="registro" class="registro_img">
+    <div id="contenedor_formulario">
+        <form action="" id="formulario_registro">
+            <label for="rut">Rut</label>
+            <input type="text" name="rut" id="rut">
+            <br>
+            <label for="nombre">Nombres</label>
+            <input type="text" name="nombre" id="nombre">
+            <br>
+            <label for="apellido">Apellidos</label>
+            <input type="text" name="apellido" id="apellido">
+            <br>
+            <label for="email">Correo electronico</label>
+            <input placeholder="tu_correo@email.cl" type="email" name="email" id="email">
+            <br>
+            <br>
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+            <br>
+            <br>
+            <label for="usuario">Usuario</label>
+            <input type="text" name="usuario" id="usuario">
+            <br>
+            <label for="contraseña">Contraseña</label>
+            <input type="text" name="contraseña" id="contraseña">
+            <br>
+            <br>
+            <input type="reset" value="Limpiar" class="button secondary">
+
+            <input type="button" value="Guardar" id="guardar" class="button primary">
+            <input type="button" value="fecha" id="fecha" class="button primary">
+                    
+        </form>
+    </div>
+</div>   
+
+
+{% endblock %}

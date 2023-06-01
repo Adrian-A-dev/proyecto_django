@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="img/icono.png">
+    <title>CarWash - {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    {% block css %}
+    {% endblock %}
+    
+    <link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
+    {% load static %}
+
+    {% load pwa %}
+
+    {% progressive_web_app_meta %}
+
+    <link rel="stylesheet" href="{% static 'app/css/estilos.css' %}">
+
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyCPfBDlHf1l-T0pdPNuDMvk4V4iyPaGx08",
+          authDomain: "carwash-7f42d.firebaseapp.com",
+          projectId: "carwash-7f42d",
+          storageBucket: "carwash-7f42d.appspot.com",
+          messagingSenderId: "1029481259531",
+          appId: "1:1029481259531:web:d0ffc1f53d72535065dd0e"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        let messaging  = firebase.messaging();
+
+        navigator.serviceWorker
+        .register('/serviceworker.js')
+        .then(function(register) {
+            messaging.useServiceWorker(register);
+            
+            messaging.requestPermission()
+            .then(function() {
+                return messaging.getToken();
+            })
+            .then(function(token) {
+                let data = {
+                    "token": token
+                }
+                //CSRF_TOKEN
+                fetch("/save-token/", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token }}"
+                    },
+                    method: 'post',
+                    body: JSON.stringify(data)
+                })
+            })
+            .catch(function(e) {
+                console.log("El usuario no ha aceptado el envÃ­o")
+            })
+        })
+
+        //recibir la notificacion desde firebase (archivo base)
+        messaging.onMessage(function(payload) {
+            let title = payload.notification.title;
+            let options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon
+            }
+            new Notification(title, options);
+        })
+
+
+    </script>
+
+</head>
+<header id="header">
+
+        <img src="{% static 'app/img/menuiconwhite.png' %}" alt="menu" class="menu" id="menu">
+
+        <div class="contenedor_logo">
+            <img src="{% static 'app/img/icono.png' %}" alt="logo" class="logo">
+        </div>
+        <div >
+            <nav id="nav"> 
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}">Agendar Servicio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'nosotros' %}">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'galeria' %}">Mapa Y Galeria</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contacto' %}">Contacto</a>
+                    </li>
+                    
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'logout' %}">cerrar sesión</a>
+                    </li>
+                    <li>
+                        <a href="#">@{{ user.username }}</a>
+                    </li>
+                    <li>
+                        {% for auth in backends.associated %}
+                            {% if auth.provider == 'facebook' %}
+                                <img src="{{ auth.extra_data.picture.data.url }}" alt="" width="50" height="50">  
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">iniciar sesión</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'registro' %}">Registrate</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                
+            </nav>
+
+        </div>
+    </header>
+<body>
+    
+
+    <div id="contenido">
+
+        {% block contenido %}
+        {% endblock %}
+
+    </div>
+
+    <footer>
+        <div class="marcas">
+            <img src="{% static 'app/img/png/bmw.png' %}" alt="bmw">
+            <img src="{% static 'app/img/png/mercedes-benz.png' %}" alt="mercedes-benz">
+            <img src="{% static 'app/img/png/nissan.png' %}" alt="nissan">
+            <img src="{% static 'app/img/png/subaru.png' %}" alt="subaru">
+            <img src="{% static 'app/img/png/toyota.png' %}" alt="toyota">
+            <img src="{% static 'app/img/png/suzuki.png' %}" alt="suzuki">
+        </div>
+        <div>
+            <div>
+                <ul>
+                    <li>
+                        <h2>MAPA DE SITIO</h2>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}">Agendar Servicio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}">Servicios</a>
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Full</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Deluxe</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Tapiz Full</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Tapiz Básico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'nosotros' %}">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'galeria' %}">Mapa Y Galeria</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <h2>COLABORADORES</h2>
+                    </li>
+                    <li>
+                        <a href="{% url 'insumos' %}">Inventario insumos</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="{% static 'app/js/menu.js' %}"></script>
+    <script src="{% static 'app/js/feriados.js' %}"></script>
+
+    {% block js %}
+    {% endblock %}
+
+    
+    
+</body>
+</html>
